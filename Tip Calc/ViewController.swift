@@ -21,16 +21,25 @@ class ViewController: UIViewController {
     
     let userPreferKey = "userPreferKey"
     let percentageKey = "percentageKey"
-    
+    let prevInputBill = "prevInputBill"
+    let lastInputDateTime = "lastInputDateTime"
     let defaults = UserDefaults.standard
     
     let tipPercentages = [0.18, 0.2, 0.25]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        billField.becomeFirstResponder()
+        self.billField.becomeFirstResponder()
+        
         // Do any additional setup after loading the view, typically from a nib.
-                
+        if let userInputDateTime = defaults.object(forKey: lastInputDateTime) as! Date! {
+            let elapsedTime = Date().timeIntervalSince(userInputDateTime)
+            if elapsedTime < 600 {
+                if let userInput = defaults.object(forKey: prevInputBill) as! String!{
+                   billField.text = userInput
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,16 +52,22 @@ class ViewController: UIViewController {
         
         onTipPercentageChange(tipPercentageSegment)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        billField.becomeFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if billField.text != ""{
+            billField.resignFirstResponder()
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func onTap(_ sender: Any) {
-        view.endEditing(true)
-    }
-    
+        
     @IBAction func onBillChange(_ sender: Any) {
         calculateTip()
     }
@@ -66,9 +81,13 @@ class ViewController: UIViewController {
         let tip = bill * tipPercentages[tipPercentageSegment.selectedSegmentIndex]
         let total = bill + tip
         
-        tipValueLabel.text = String(format: "$%.2f", tip)
-        totalValueLabel.text = String(format: "$%.2f", total)
+        //Format locale curency
+        let formatter = NumberFormatter()
+        formatter.numberStyle = NumberFormatter.Style.currency
+        formatter.locale = Locale.current
+                
+        tipValueLabel.text = formatter.string(from: NSNumber(value: tip as Double!))
+        totalValueLabel.text = formatter.string(from: NSNumber(value: total as Double!))
     }
-    
 }
 

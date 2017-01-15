@@ -11,7 +11,6 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var defaultPercentageSegment: UISegmentedControl!
-    @IBOutlet weak var themeSwitch: UISwitch!
     
     let defaults = UserDefaults.standard
     let userPreferKey = "userPreferKey"
@@ -26,11 +25,7 @@ class SettingsViewController: UIViewController {
             defaultPercentageSegment.selectedSegmentIndex = 0;
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-    
-    }
-    
+        
     override func viewWillDisappear(_ animated: Bool) {
         let userPreferences: Any = [
             percentageKey: defaultPercentageSegment.selectedSegmentIndex
