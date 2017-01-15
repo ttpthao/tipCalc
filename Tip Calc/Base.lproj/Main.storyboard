@@ -80,7 +80,7 @@
                                     <segment title="25%"/>
                                 </segments>
                                 <connections>
-                                    <action selector="onTipPercentageChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="Tq6-Vp-SEo"/>
+                                    <action selector="onTipPercentageChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="hil-Gu-7Us"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>

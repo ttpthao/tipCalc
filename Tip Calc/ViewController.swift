@@ -19,6 +19,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalValueLabel: UILabel!
     @IBOutlet weak var tipPercentageSegment: UISegmentedControl!
     
+    let userPreferKey = "userPreferKey"
+    let percentageKey = "percentageKey"
+    
+    let defaults = UserDefaults.standard
+    
+    let tipPercentages = [0.18, 0.2, 0.25]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +34,14 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if let userPreferences = defaults.dictionary(forKey: userPreferKey){
+            tipPercentageSegment.selectedSegmentIndex = userPreferences[percentageKey] as! Int!
+        }
+        else {
+            tipPercentageSegment.selectedSegmentIndex = 0
+        }
         
+        onTipPercentageChange(tipPercentageSegment)
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,23 +57,17 @@ class ViewController: UIViewController {
         calculateTip()
     }
     
-    @IBAction func onTipPercentageChange(_ sender: Any) {
+    @IBAction func onTipPercentageChange(_ sender: UISegmentedControl) {
         calculateTip()
     }
-        
+    
     func calculateTip() {
-        
-        let tipPercentages = [0.18, 0.2, 0.25]
-        
         let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipPercentageSegment.selectedSegmentIndex]
         let total = bill + tip
         
         tipValueLabel.text = String(format: "$%.2f", tip)
         totalValueLabel.text = String(format: "$%.2f", total)
-        
-        
-        
     }
     
 }
