@@ -29,7 +29,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+- The settings page challenged me so much. I took a lot of hours to learn how to store user preferences. 
+- I didn't work with Swift before so sometimes it made me took lots of time to find something I want such as data type or name of a control.
 
 ## License
 
