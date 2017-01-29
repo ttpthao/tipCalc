@@ -77,6 +77,11 @@ class ViewController: UIViewController {
     }
     
     func calculateTip() {
+        if (billField.text != "") {
+            tipValueLabel.addTransition(duration: 0.4)
+            totalValueLabel.addTransition(duration: 0.4)
+        }
+        
         let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipPercentageSegment.selectedSegmentIndex]
         let total = bill + tip
@@ -85,9 +90,31 @@ class ViewController: UIViewController {
         let formatter = NumberFormatter()
         formatter.numberStyle = NumberFormatter.Style.currency
         formatter.locale = Locale.current
-                
-        tipValueLabel.text = formatter.string(from: NSNumber(value: tip as Double!))
-        totalValueLabel.text = formatter.string(from: NSNumber(value: total as Double!))
+        
+        UIView.transition(with: tipValueLabel,
+                          duration: 0.4,
+                          options: [.transitionCrossDissolve],
+                          animations: {
+                            self.tipValueLabel.text = formatter.string(from: NSNumber(value: tip as Double!))
+        }, completion: nil)
+        
+        UIView.transition(with: totalValueLabel,
+                          duration: 0.4,
+                          options: [.transitionCrossDissolve],
+                          animations: {
+                            self.totalValueLabel.text = formatter.string(from: NSNumber(value: total as Double!))
+        }, completion: nil)
     }
 }
 
+extension UIView {
+    func addTransition(duration:CFTimeInterval) {
+        let animation:CATransition = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            kCAMediaTimingFunctionEaseInEaseOut)
+        animation.type = kCATransitionPush
+        animation.subtype = kCATransitionFromTop
+        animation.duration = duration
+        self.layer.add(animation, forKey: kCATransitionPush)
+    }
+}
