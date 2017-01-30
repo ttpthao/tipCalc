@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
     @IBOutlet weak var tipPercentageSegment: UISegmentedControl!
+    @IBOutlet weak var saveButton: UIButton!
     
     let userPreferKey = "userPreferKey"
     let percentageKey = "percentageKey"
@@ -26,6 +27,10 @@ class ViewController: UIViewController {
     let defaults = UserDefaults.standard
     
     let tipPercentages = [0.18, 0.2, 0.25]
+    var bill = 0.0
+    var tip = 0.0
+    var total = 0.0
+    var billNumber = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +74,7 @@ class ViewController: UIViewController {
     }
         
     @IBAction func onBillChange(_ sender: Any) {
+        saveButton.isEnabled = true
         calculateTip()
     }
     
@@ -82,9 +88,9 @@ class ViewController: UIViewController {
             totalValueLabel.addTransition(duration: 0.4)
         }
         
-        let bill = Double(billField.text!) ?? 0
-        let tip = bill * tipPercentages[tipPercentageSegment.selectedSegmentIndex]
-        let total = bill + tip
+        bill = Double(billField.text!) ?? 0
+        tip = bill * tipPercentages[tipPercentageSegment.selectedSegmentIndex]
+        total = bill + tip
         
         //Format locale curency
         let formatter = NumberFormatter()
@@ -95,15 +101,30 @@ class ViewController: UIViewController {
                           duration: 0.4,
                           options: [.transitionCrossDissolve],
                           animations: {
-                            self.tipValueLabel.text = formatter.string(from: NSNumber(value: tip as Double!))
+                            self.tipValueLabel.text = formatter.string(from: NSNumber(value: self.tip as Double!))
         }, completion: nil)
         
         UIView.transition(with: totalValueLabel,
                           duration: 0.4,
                           options: [.transitionCrossDissolve],
                           animations: {
-                            self.totalValueLabel.text = formatter.string(from: NSNumber(value: total as Double!))
+                            self.totalValueLabel.text = formatter.string(from: NSNumber(value: self.total as Double!))
         }, completion: nil)
+    }
+    
+    @IBAction func onSaveHistory(_ sender: Any) {
+        let currentDate = NSDate()
+        //check bill is set or not
+        if bill == 0 {
+            return
+        }
+        
+        //add 1 new bill to billNumber
+        billNumber += 1
+        defaults.set(billNumber, forKey: "billNumber")
+        
+        //add to nsdefault
+        defaults.setValue([Double(bill),Double(tip),Double(total),(currentDate)], forKey: ("bill No."+String(billNumber)))
     }
 }
 

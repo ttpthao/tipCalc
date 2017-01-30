@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tms-ae-Gyd">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tms-ae-Gyd">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -83,6 +83,14 @@
                                     <action selector="onTipPercentageChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="hil-Gu-7Us"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ymt-8g-Bv0">
+                                <rect key="frame" x="264" y="79" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="onSaveHistory:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q3G-70-0cm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -91,6 +99,11 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Tip Calculator" id="Ksa-9P-ZPE">
+                        <barButtonItem key="leftBarButtonItem" title="History" id="8Lx-gU-CmY">
+                            <connections>
+                                <segue destination="u8G-cQ-E7H" kind="show" id="ucg-wb-lv3"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="xLK-eK-g3A">
                             <connections>
                                 <segue destination="YQk-UV-hTC" kind="show" id="1gc-t4-RzU"/>
@@ -101,6 +114,7 @@
                         <outlet property="billField" destination="6Aa-3l-XPm" id="bZI-ZF-xgL"/>
                         <outlet property="billLabel" destination="A55-ue-Pu9" id="Ypx-9M-b6K"/>
                         <outlet property="breakView" destination="GbL-Bq-P75" id="eEk-gj-1uq"/>
+                        <outlet property="saveButton" destination="ymt-8g-Bv0" id="6sH-rt-ui8"/>
                         <outlet property="tipLabel" destination="l2B-Ub-EZ3" id="hTm-7d-Ckt"/>
                         <outlet property="tipPercentageSegment" destination="jwH-eB-eVQ" id="GB9-rZ-b6D"/>
                         <outlet property="tipValueLabel" destination="rf6-SX-jeS" id="TMS-D4-dlh"/>
@@ -112,6 +126,41 @@
                 <tapGestureRecognizer id="kej-qO-wwn"/>
             </objects>
             <point key="canvasLocation" x="963.75" y="34.859154929577464"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="sAc-TF-uMn">
+            <objects>
+                <tableViewController title="History" id="u8G-cQ-E7H" customClass="HistoryTableViewController" customModule="Tip_Calc" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yup-1O-Eft">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="History View Cell" id="ucB-3e-Dlz">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ucB-3e-Dlz" id="qRQ-Wn-v3i">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="u8G-cQ-E7H" id="IZm-VY-jbs"/>
+                            <outlet property="delegate" destination="u8G-cQ-E7H" id="Xnp-bH-G7l"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="History" id="c8t-wh-WYe">
+                        <barButtonItem key="rightBarButtonItem" title="Clear" id="KcY-Qb-RaZ">
+                            <connections>
+                                <action selector="onClearHistory:" destination="u8G-cQ-E7H" id="bm4-dA-u8e"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uri-bT-6ck" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1301" y="786"/>
         </scene>
         <!--Settings-->
         <scene sceneID="UJk-bc-MIG">
@@ -144,7 +193,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="E6N-6V-P0c"/>
+                    <navigationItem key="navigationItem" title="Settings" id="E6N-6V-P0c"/>
                     <connections>
                         <outlet property="defaultPercentageSegment" destination="U5O-GB-bl0" id="Ada-zp-RqL"/>
                     </connections>

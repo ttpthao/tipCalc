@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		376A1CC01E3F9BE6009036B4 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A1CBF1E3F9BE6009036B4 /* HistoryTableViewController.swift */; };
 		37C3BEE11E29EFBB00261E67 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3BEE01E29EFBB00261E67 /* SettingsViewController.swift */; };
 		37D0BD991E266F290047664F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D0BD981E266F290047664F /* AppDelegate.swift */; };
 		37D0BD9B1E266F290047664F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D0BD9A1E266F290047664F /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		376A1CBF1E3F9BE6009036B4 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		37C3BEE01E29EFBB00261E67 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		37D0BD951E266F290047664F /* Tip Calc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tip Calc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D0BD981E266F290047664F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				37D0BD9F1E266F290047664F /* Assets.xcassets */,
 				37D0BDA11E266F290047664F /* LaunchScreen.storyboard */,
 				37D0BDA41E266F290047664F /* Info.plist */,
+				376A1CBF1E3F9BE6009036B4 /* HistoryTableViewController.swift */,
 			);
 			path = "Tip Calc";
 			sourceTree = "<group>";
@@ -191,11 +194,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Thao Tran Thi Phuong";
 				TargetAttributes = {
 					37D0BD941E266F290047664F = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 83RFM76L96;
 						ProvisioningStyle = Automatic;
 					};
 					37D0BDA81E266F290047664F = {
@@ -262,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				376A1CC01E3F9BE6009036B4 /* HistoryTableViewController.swift in Sources */,
 				37D0BD9B1E266F290047664F /* ViewController.swift in Sources */,
 				37D0BD991E266F290047664F /* AppDelegate.swift in Sources */,
 				37C3BEE11E29EFBB00261E67 /* SettingsViewController.swift in Sources */,
@@ -337,6 +342,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -359,7 +365,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -386,6 +392,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -402,7 +409,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -414,9 +421,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 83RFM76L96;
 				INFOPLIST_FILE = "Tip Calc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.codepath.Tip-Calc";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ttpthao.Tip-Calc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -426,9 +435,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 83RFM76L96;
 				INFOPLIST_FILE = "Tip Calc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.codepath.Tip-Calc";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ttpthao.Tip-Calc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
