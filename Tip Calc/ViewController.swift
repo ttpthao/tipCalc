@@ -42,7 +42,8 @@ class ViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        billField.becomeFirstResponder()
         if let userPreferences = defaults.dictionary(forKey: userPreferKey){
             tipPercentageSegment.selectedSegmentIndex = userPreferences[percentageKey] as! Int!
         }
@@ -51,10 +52,6 @@ class ViewController: UIViewController {
         }
         
         onTipPercentageChange(tipPercentageSegment)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        billField.becomeFirstResponder()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -77,6 +74,7 @@ class ViewController: UIViewController {
     }
     
     func calculateTip() {
+        validateInput()
         if (billField.text != "") {
             tipValueLabel.addTransition(duration: 0.4)
             totalValueLabel.addTransition(duration: 0.4)
@@ -91,19 +89,32 @@ class ViewController: UIViewController {
         formatter.numberStyle = NumberFormatter.Style.currency
         formatter.locale = Locale.current
         
-        UIView.transition(with: tipValueLabel,
-                          duration: 0.4,
-                          options: [.transitionCrossDissolve],
-                          animations: {
-                            self.tipValueLabel.text = formatter.string(from: NSNumber(value: tip as Double!))
-        }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 1, options: [.transitionCrossDissolve], animations: {
+            self.tipValueLabel.text = formatter.string(from: NSNumber(value: total as Double!))}, completion: nil)
         
-        UIView.transition(with: totalValueLabel,
-                          duration: 0.4,
-                          options: [.transitionCrossDissolve],
-                          animations: {
-                            self.totalValueLabel.text = formatter.string(from: NSNumber(value: total as Double!))
-        }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 1, options: [.transitionCrossDissolve], animations: {
+            self.totalValueLabel.text = formatter.string(from: NSNumber(value: total as Double!))}, completion: nil)
+        
+    }
+    
+    func validateInput(){
+        //check bunch of zeros
+        if (billField.text!) == "0"{
+            billField.deleteBackward()
+        }
+        
+        //check multiple point
+        var decimalCount = 0;
+        let billText = billField.text!
+        let array = Array(billText.characters)
+        for letter in array {
+            if letter == "." {
+                decimalCount += 1
+            }
+        }
+        if decimalCount > 1 {
+            billField.deleteBackward()
+        }
     }
 }
 
